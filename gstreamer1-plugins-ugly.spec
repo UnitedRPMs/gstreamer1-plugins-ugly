@@ -103,7 +103,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
 
 %changelog
-* Tue Nov 15 Pavlo Rudyi <paulcarroty@riseup.net> - 1.10.0-1
+* Tue Nov 15 2016 Pavlo Rudyi <paulcarroty@riseup.net> - 1.10.0-1
 - Updated to 1.10
 
 * Thu Oct 06 2016 David Vásquez <davidjeremias82 AT gmail DOT com> 1.9.2-1
