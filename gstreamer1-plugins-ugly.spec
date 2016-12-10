@@ -1,6 +1,6 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.10.0
+Version:        1.10.2
 Release:        1%{?dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -55,28 +55,25 @@ be shipped in gstreamer-plugins-good because:
 %setup -q -n gst-plugins-ugly-%{version}
 
 
-
 %build
-
-export CFLAGS="$RPM_OPT_FLAGS -Wno-deprecated-declarations"
-
-%configure \
+%configure --disable-static \
     --with-package-name="gst-plugins-ugly 1.0 rpmfusion rpm" \
     --with-package-origin="http://rpmfusion.org/" \
-    --enable-debug --enable-gtk-doc \
-    --enable-experimental \
-    --disable-static
+    --enable-debug \
+    --enable-gtk-doc \
+    --disable-mpg123
 make %{?_smp_mflags}
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 %find_lang gst-plugins-ugly-1.0
 rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
 
 %files -f gst-plugins-ugly-1.0.lang
-%doc AUTHORS COPYING README REQUIREMENTS
+%doc AUTHORS README REQUIREMENTS
+%license COPYING
 %{_datadir}/gstreamer-1.0
 # Plugins without external dependencies
 %{_libdir}/gstreamer-1.0/libgstasf.so
@@ -95,7 +92,6 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgsttwolame.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
-%{_libdir}/gstreamer-1.0/libgstmpg123.so
 
 %files devel-docs
 # Take the dir and everything below it for proper dir ownership
@@ -103,6 +99,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
 
 %changelog
+* Sat Dec 10 2016 Pavlo Rudyi <paulcarroty@riseup.net> - 1.10.2-1
+- Updated to 1.10.2
+
 * Tue Nov 15 2016 Pavlo Rudyi <paulcarroty@riseup.net> - 1.10.0-1
 - Updated to 1.10
 
