@@ -1,6 +1,6 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.10.2
+Version:        1.11.1
 Release:        1%{?dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -88,7 +88,7 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 %{_libdir}/gstreamer-1.0/libgstcdio.so
 %{_libdir}/gstreamer-1.0/libgstdvdread.so
 %{_libdir}/gstreamer-1.0/libgstlame.so
-%{_libdir}/gstreamer-1.0/libgstmad.so
+# %{_libdir}/gstreamer-1.0/libgstmad.so
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgsttwolame.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
@@ -99,6 +99,10 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
 
 %changelog
+
+* Fri Jan 27 2017 David Vásquez <davidjeremias82 AT gmail DOT com> 1.11.1-1
+- Updated to 1.11.1
+
 * Sat Dec 10 2016 Pavlo Rudyi <paulcarroty@riseup.net> - 1.10.2-1
 - Updated to 1.10.2
 
