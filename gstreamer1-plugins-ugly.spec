@@ -1,11 +1,16 @@
+%global gitdate 20170224
+%global commit0 1f1339913fb88f061899633105ab21745791ca6b
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gver .%{gitdate}git%{shortcommit0}
+
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.11.1
-Release:        1%{?dist}
+Version:        1.11.2
+Release:        1%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
-Source0:        http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-%{version}.tar.xz
+Source0: 	https://github.com/GStreamer/gst-plugins-ugly/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 BuildRequires:  gstreamer1-devel >= %{version}
 BuildRequires:  gstreamer1-plugins-base-devel >= %{version}
 BuildRequires:  gettext-devel gtk-doc
@@ -22,6 +27,10 @@ BuildRequires:  x264-devel >= 0.0.0-0.28
 BuildRequires:  opencore-amr-devel
 BuildRequires:	libmpg123-devel
 BuildRequires:	check-devel
+BuildRequires:	git
+BuildRequires:	autoconf-archive
+BuildRequires:	intltool
+BuildRequires:	libtool
 
 %description
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -52,10 +61,17 @@ be shipped in gstreamer-plugins-good because:
 
 
 %prep
-%setup -q -n gst-plugins-ugly-%{version}
-
+%autosetup -n gst-plugins-ugly-%{commit0} 
+rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common  
 
 %build
+
+NOCONFIGURE=1 ./autogen.sh
+
+%if 0%{?fedora} >= 26
+CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-error" CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-error" CPPFLAGS="-Wdate-time -D_FORTIFY_SOURCE=2" LDFLAGS="-Wl,-z,relro -Wl,-z,defs -Wl,-O1 -Wl,--as-needed"
+%endif
+
 %configure --disable-static \
     --with-package-name="gst-plugins-ugly 1.0 rpmfusion rpm" \
     --with-package-origin="http://rpmfusion.org/" \
@@ -99,6 +115,9 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
 
 %changelog
+
+* Fri Feb 24 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-1.20170224git1f13399
+- Updated to 1.11.2-1.20170224git1f13399
 
 * Fri Jan 27 2017 David Vásquez <davidjeremias82 AT gmail DOT com> 1.11.1-1
 - Updated to 1.11.1
