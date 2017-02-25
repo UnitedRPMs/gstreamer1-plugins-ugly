@@ -35,6 +35,7 @@ BuildRequires:	git
 BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	libtool
+Recommends:	gstreamer1-plugin-mpg123 >= %{version}
 
 %description
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -64,6 +65,14 @@ be shipped in gstreamer-plugins-good because:
 - there are possible licensing issues with the code.
 
 
+%package -n gstreamer1-plugin-mpg123
+Summary: GStreamer plug-in for mp3 support through mpg123
+Group: Applications/Multimedia
+
+%description -n gstreamer1-plugin-mpg123
+GStreamer plug-in for mp3 support through mpeg123.
+
+
 %prep
 %autosetup -n gst-plugins-ugly-%{commit0} 
 rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common  
@@ -81,14 +90,49 @@ CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -
     --with-package-origin="http://rpmfusion.org/" \
     --enable-debug \
     --enable-gtk-doc \
-    --disable-mpg123
-make %{?_smp_mflags}
+    --enable-mpg123
 
+make %{?_smp_mflags}
 
 %install
 %make_install
 %find_lang gst-plugins-ugly-1.0
 rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
+
+# Register as an AppStream component to be visible in the software center
+#
+# NOTE: It would be *awesome* if this file was maintained by the upstream
+# project, translated and installed into the right place during `make install`.
+#
+# See http://www.freedesktop.org/software/appstream/docs/ for more details.
+#
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
+cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-mpg123.appdata.xml <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Kalev Lember <klember@redhat.com> -->
+<component type="codec">
+  <id>gstreamer-mpg123</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>GStreamer Multimedia Codecs - MP3</name>
+  <summary>Multimedia playback for MP3</summary>
+  <description>
+    <p>
+      This addon includes a codec for MP3 playback.
+    </p>
+    <p>
+      A codec decodes audio and video for playback or editing and is also
+      used for transmission or storage.
+      Different codecs are used in video-conferencing, streaming media and
+      video editing applications.
+    </p>
+  </description>
+  <url type="homepage">http://gstreamer.freedesktop.org/</url>
+  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer</url>
+  <url type="help">http://gstreamer.freedesktop.org/documentation/</url>
+  <url type="donation">http://www.gnome.org/friends/</url>
+  <update_contact><!-- upstream-contact_at_email.com --></update_contact>
+</component>
+EOF
 
 
 %files -f gst-plugins-ugly-1.0.lang
@@ -116,6 +160,10 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 %files devel-docs
 # Take the dir and everything below it for proper dir ownership
 %doc %{_datadir}/gtk-doc
+
+%files -n gstreamer1-plugin-mpg123
+%{_libdir}/gstreamer-1.0/libgstmpg123.so
+%{_datadir}/appdata/gstreamer-mpg123.appdata.xml
 
 
 %changelog
