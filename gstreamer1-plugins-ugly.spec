@@ -25,11 +25,7 @@ BuildRequires:  libcdio-devel >= 0.82
 BuildRequires:  twolame-devel
 BuildRequires:  x264-devel >= 0.0.0-0.28
 BuildRequires:  opencore-amr-devel
-%if 0%{?fedora} <= 24
-BuildRequires:	libmpg123-devel
-%else
 BuildRequires:	mpg123-devel
-%endif
 BuildRequires:	check-devel
 BuildRequires:	git
 BuildRequires:	autoconf-archive
