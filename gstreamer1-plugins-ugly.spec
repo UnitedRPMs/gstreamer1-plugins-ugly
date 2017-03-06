@@ -164,6 +164,9 @@ EOF
 
 %changelog
 
+* Sun Mar 05 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-2.20170224git1f13399
+- Changed "build requires" to new name of mpg123-devel
+
 * Fri Feb 24 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-1.20170224git1f13399
 - Updated to 1.11.2-1.20170224git1f13399
 
