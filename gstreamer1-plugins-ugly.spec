@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.11.2
-Release:        2%{?gver}%{dist}
+Release:        3%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -32,6 +32,7 @@ BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	libtool
 Recommends:	gstreamer1-plugin-mpg123 >= %{version}
+Recommends:	gstreamer1-plugin-a52dec >= %{version}
 
 %description
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -60,13 +61,19 @@ be shipped in gstreamer-plugins-good because:
 - the license of the library is not LGPL
 - there are possible licensing issues with the code.
 
-
 %package -n gstreamer1-plugin-mpg123
 Summary: GStreamer plug-in for mp3 support through mpg123
 Group: Applications/Multimedia
 
 %description -n gstreamer1-plugin-mpg123
 GStreamer plug-in for mp3 support through mpeg123.
+
+%package -n gstreamer1-plugin-a52dec
+Summary: GStreamer plug-in for ac3 support through liba52dec
+Group: Applications/Multimedia
+
+%description -n gstreamer1-plugin-a52dec
+GStreamer plug-in for ac3 support through liba52dec.
 
 
 %prep
@@ -95,6 +102,7 @@ make %{?_smp_mflags}
 %find_lang gst-plugins-ugly-1.0
 rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
+# gstreamer1-plugin-mpg123 AppStream
 # Register as an AppStream component to be visible in the software center
 #
 # NOTE: It would be *awesome* if this file was maintained by the upstream
@@ -105,9 +113,45 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
 cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-mpg123.appdata.xml <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 Kalev Lember <klember@redhat.com> -->
+<!-- Copyright 2017 UnitedRPMs <unitedrpms@protonmail.com> -->
 <component type="codec">
   <id>gstreamer-mpg123</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>GStreamer Multimedia Codecs - MP3</name>
+  <summary>Multimedia playback for MP3</summary>
+  <description>
+    <p>
+      This addon includes a codec for MP3 playback.
+    </p>
+    <p>
+      A codec decodes audio and video for playback or editing and is also
+      used for transmission or storage.
+      Different codecs are used in video-conferencing, streaming media and
+      video editing applications.
+    </p>
+  </description>
+  <url type="homepage">http://gstreamer.freedesktop.org/</url>
+  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer</url>
+  <url type="help">http://gstreamer.freedesktop.org/documentation/</url>
+  <url type="donation">http://www.gnome.org/friends/</url>
+  <update_contact><!-- upstream-contact_at_email.com --></update_contact>
+</component>
+EOF
+
+# gstreamer1-plugin-a52dec AppStream
+# Register as an AppStream component to be visible in the software center
+#
+# NOTE: It would be *awesome* if this file was maintained by the upstream
+# project, translated and installed into the right place during `make install`.
+#
+# See http://www.freedesktop.org/software/appstream/docs/ for more details.
+#
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
+cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-a52dec.appdata.xml <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 UnitedRPMs <unitedrpms@protonmail.com> -->
+<component type="codec">
+  <id>gstreamer-a52dec</id>
   <metadata_license>CC0-1.0</metadata_license>
   <name>GStreamer Multimedia Codecs - MP3</name>
   <summary>Multimedia playback for MP3</summary>
@@ -142,7 +186,6 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstrmdemux.so
 %{_libdir}/gstreamer-1.0/libgstxingmux.so
 # Plugins with external dependencies
-%{_libdir}/gstreamer-1.0/libgsta52dec.so
 %{_libdir}/gstreamer-1.0/libgstamrnb.so
 %{_libdir}/gstreamer-1.0/libgstamrwbdec.so
 %{_libdir}/gstreamer-1.0/libgstcdio.so
@@ -161,8 +204,14 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstmpg123.so
 %{_datadir}/appdata/gstreamer-mpg123.appdata.xml
 
+%files -n gstreamer1-plugin-a52dec
+%{_libdir}/gstreamer-1.0/libgsta52dec.so
+%{_datadir}/appdata/gstreamer-a52dec.appdata.xml
 
 %changelog
+
+* Tue Mar 28 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-3.20170224git1f13399
+- Compatibility for new changes in a52dec
 
 * Sun Mar 05 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-2.20170224git1f13399
 - Changed "build requires" to new name of mpg123-devel
