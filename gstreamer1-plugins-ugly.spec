@@ -5,8 +5,8 @@
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.11.2
-Release:        3%{?gver}%{dist}
+Version:        1.11.90
+Release:        2%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -209,6 +209,9 @@ EOF
 %{_datadir}/appdata/gstreamer-a52dec.appdata.xml
 
 %changelog
+
+* Thu Apr 20 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.90-2
+- Updated to 1.11.90-2
 
 * Tue Mar 28 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.2-3.20170224git1f13399
 - Compatibility for new changes in a52dec
