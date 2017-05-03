@@ -1,11 +1,11 @@
-%global gitdate 20170224
-%global commit0 1f1339913fb88f061899633105ab21745791ca6b
+%global gitdate 20170502
+%global commit0 cbcf4a399aeadcd3fb1dde57e28b029fe01c35a3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gver .%{gitdate}git%{shortcommit0}
+%global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.11.90
+Version:        1.11.91
 Release:        2%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -176,14 +176,13 @@ EOF
 
 
 %files -f gst-plugins-ugly-1.0.lang
-%doc AUTHORS README REQUIREMENTS
-%license COPYING
+%doc AUTHORS README REQUIREMENTS COPYING
 %{_datadir}/gstreamer-1.0
 # Plugins without external dependencies
 %{_libdir}/gstreamer-1.0/libgstasf.so
 %{_libdir}/gstreamer-1.0/libgstdvdlpcmdec.so
 %{_libdir}/gstreamer-1.0/libgstdvdsub.so
-%{_libdir}/gstreamer-1.0/libgstrmdemux.so
+# %{_libdir}/gstreamer-1.0/libgstrmdemux.so
 %{_libdir}/gstreamer-1.0/libgstxingmux.so
 # Plugins with external dependencies
 %{_libdir}/gstreamer-1.0/libgstamrnb.so
@@ -195,6 +194,7 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgsttwolame.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
+%{_libdir}/gstreamer-1.0/libgstrealmedia.so
 
 %files devel-docs
 # Take the dir and everything below it for proper dir ownership
@@ -209,6 +209,9 @@ EOF
 %{_datadir}/appdata/gstreamer-a52dec.appdata.xml
 
 %changelog
+
+* Sat Apr 29 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.91-2.gitcbcf4a3
+- Updated to 1.11.91-2.gitcbcf4a3
 
 * Thu Apr 20 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.90-2
 - Updated to 1.11.90-2
