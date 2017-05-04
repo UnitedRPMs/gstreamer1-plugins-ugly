@@ -96,7 +96,7 @@ CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -
     --enable-silent-rules \
     --enable-mpg123
 
-make %{?_smp_mflags} V=1
+make %{?_smp_mflags} V=0
 
 %install
 %make_install
