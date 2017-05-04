@@ -93,9 +93,10 @@ CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -
     --with-package-origin="http://rpmfusion.org/" \
     --enable-debug \
     --enable-gtk-doc \
+    --enable-silent-rules \
     --enable-mpg123
 
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 %make_install
