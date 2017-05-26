@@ -1,11 +1,11 @@
 %global gitdate 20170502
-%global commit0 cbcf4a399aeadcd3fb1dde57e28b029fe01c35a3
+%global commit0 d2374716e2cf8d7ecf9b478e5c13e2461cab0a4d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.11.91
+Version:        1.12.0
 Release:        2%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -210,6 +210,9 @@ EOF
 %{_datadir}/appdata/gstreamer-a52dec.appdata.xml
 
 %changelog
+
+* Thu May 25 2017 David Vásquez <davidva AT tutanota DOT com> 1.12.0-2
+- Updated to 1.12.0-2
 
 * Sat Apr 29 2017 David Vásquez <davidva AT tutanota DOT com> 1.11.91-2.gitcbcf4a3
 - Updated to 1.11.91-2.gitcbcf4a3
