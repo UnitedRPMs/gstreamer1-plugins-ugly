@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.12.0
-Release:        2%{?gver}%{dist}
+Release:        5%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -31,8 +31,7 @@ BuildRequires:	git
 BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	libtool
-Recommends:	gstreamer1-plugin-mpg123 >= %{version}
-Recommends:	gstreamer1-plugin-a52dec >= %{version}
+Recommends:	gstreamer1-plugins-ugly-free >= %{version}
 
 %description
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -49,6 +48,7 @@ gstreamer-plugins-good because:
 Summary: Development documentation for the GStreamer "ugly" plug-ins
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
+Provides: gstreamer1-plugins-ugly-free-devel >= %{version}
 BuildArch: noarch
 
 %description devel-docs
@@ -61,19 +61,18 @@ be shipped in gstreamer-plugins-good because:
 - the license of the library is not LGPL
 - there are possible licensing issues with the code.
 
-%package -n gstreamer1-plugin-mpg123
-Summary: GStreamer plug-in for mp3 support through mpg123
+
+%package -n gstreamer1-plugins-ugly-free
+Summary: GStreamer streaming media framework "ugly" plugins
 Group: Applications/Multimedia
+Obsoletes: gstreamer1-plugin-mpg123 
+Obsoletes: gstreamer1-plugin-a52dec
 
-%description -n gstreamer1-plugin-mpg123
-GStreamer plug-in for mp3 support through mpeg123.
+%description -n gstreamer1-plugins-ugly-free
+GStreamer is a streaming media framework, based on graphs of elements which
+operate on media data.
 
-%package -n gstreamer1-plugin-a52dec
-Summary: GStreamer plug-in for ac3 support through liba52dec
-Group: Applications/Multimedia
-
-%description -n gstreamer1-plugin-a52dec
-GStreamer plug-in for ac3 support through liba52dec.
+This package contains plug-ins whose license is not fully compatible with LGPL.
 
 
 %prep
@@ -103,7 +102,6 @@ make %{?_smp_mflags} V=0
 %find_lang gst-plugins-ugly-1.0
 rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 
-# gstreamer1-plugin-mpg123 AppStream
 # Register as an AppStream component to be visible in the software center
 #
 # NOTE: It would be *awesome* if this file was maintained by the upstream
@@ -112,61 +110,35 @@ rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
 # See http://www.freedesktop.org/software/appstream/docs/ for more details.
 #
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
-cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-mpg123.appdata.xml <<EOF
+cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-ugly-free.appdata.xml <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 UnitedRPMs <unitedrpms@protonmail.com> -->
+<!-- Copyright 2013 Richard Hughes <richard@hughsie.com> -->
 <component type="codec">
-  <id>gstreamer-mpg123</id>
+  <id>gstreamer-ugly-free</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <name>GStreamer Multimedia Codecs - MP3</name>
-  <summary>Multimedia playback for MP3</summary>
+  <name>GStreamer Multimedia Codecs - Extra</name>
+  <summary>Multimedia playback for CD, DVD, and MP3</summary>
   <description>
     <p>
-      This addon includes a codec for MP3 playback.
+      This addon includes several additional codecs that have good quality and
+      correct functionality, but whose license is not fully compatible with LGPL.
     </p>
     <p>
-      A codec decodes audio and video for playback or editing and is also
+      These codecs can be used to encode and decode media files where the
+      format is not patent encumbered.
+    </p>
+    <p>
+      A codec decodes audio and video for for playback or editing and is also
       used for transmission or storage.
       Different codecs are used in video-conferencing, streaming media and
       video editing applications.
     </p>
   </description>
-  <url type="homepage">http://gstreamer.freedesktop.org/</url>
-  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer</url>
-  <url type="help">http://gstreamer.freedesktop.org/documentation/</url>
-  <url type="donation">http://www.gnome.org/friends/</url>
-  <update_contact><!-- upstream-contact_at_email.com --></update_contact>
-</component>
-EOF
-
-# gstreamer1-plugin-a52dec AppStream
-# Register as an AppStream component to be visible in the software center
-#
-# NOTE: It would be *awesome* if this file was maintained by the upstream
-# project, translated and installed into the right place during `make install`.
-#
-# See http://www.freedesktop.org/software/appstream/docs/ for more details.
-#
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
-cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-a52dec.appdata.xml <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 UnitedRPMs <unitedrpms@protonmail.com> -->
-<component type="codec">
-  <id>gstreamer-a52dec</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <name>GStreamer Multimedia Codecs - MP3</name>
-  <summary>Multimedia playback for MP3</summary>
-  <description>
-    <p>
-      This addon includes a codec for MP3 playback.
-    </p>
-    <p>
-      A codec decodes audio and video for playback or editing and is also
-      used for transmission or storage.
-      Different codecs are used in video-conferencing, streaming media and
-      video editing applications.
-    </p>
-  </description>
+  <keywords>
+    <keyword>CD</keyword>
+    <keyword>DVD</keyword>
+    <keyword>MP3</keyword>
+  </keywords>
   <url type="homepage">http://gstreamer.freedesktop.org/</url>
   <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=GStreamer</url>
   <url type="help">http://gstreamer.freedesktop.org/documentation/</url>
@@ -184,13 +156,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstdvdlpcmdec.so
 %{_libdir}/gstreamer-1.0/libgstdvdsub.so
 # %{_libdir}/gstreamer-1.0/libgstrmdemux.so
-%{_libdir}/gstreamer-1.0/libgstxingmux.so
 # Plugins with external dependencies
 %{_libdir}/gstreamer-1.0/libgstamrnb.so
 %{_libdir}/gstreamer-1.0/libgstamrwbdec.so
-%{_libdir}/gstreamer-1.0/libgstcdio.so
-%{_libdir}/gstreamer-1.0/libgstdvdread.so
-%{_libdir}/gstreamer-1.0/libgstlame.so
 # %{_libdir}/gstreamer-1.0/libgstmad.so
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgsttwolame.so
@@ -201,15 +169,21 @@ EOF
 # Take the dir and everything below it for proper dir ownership
 %doc %{_datadir}/gtk-doc
 
-%files -n gstreamer1-plugin-mpg123
+%files -n gstreamer1-plugins-ugly-free
+%{_datadir}/appdata/gstreamer-ugly-free.appdata.xml
+# Plugins without external dependencies
+%{_libdir}/gstreamer-1.0/libgstxingmux.so
+# Plugins with external dependencies
+%{_libdir}/gstreamer-1.0/libgstcdio.so
+%{_libdir}/gstreamer-1.0/libgstdvdread.so
+%{_libdir}/gstreamer-1.0/libgstlame.so
 %{_libdir}/gstreamer-1.0/libgstmpg123.so
-%{_datadir}/appdata/gstreamer-mpg123.appdata.xml
-
-%files -n gstreamer1-plugin-a52dec
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
-%{_datadir}/appdata/gstreamer-a52dec.appdata.xml
 
 %changelog
+
+* Thu May 25 2017 David Vásquez <davidva AT tutanota DOT com> 1.12.0-5
+- Mitigation of https://bugzilla.redhat.com/show_bug.cgi?id=1449884
 
 * Thu May 25 2017 David Vásquez <davidva AT tutanota DOT com> 1.12.0-2
 - Updated to 1.12.0-2
