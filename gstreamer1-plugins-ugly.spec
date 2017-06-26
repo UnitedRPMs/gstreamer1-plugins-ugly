@@ -1,11 +1,11 @@
-%global gitdate 20170502
-%global commit0 d2374716e2cf8d7ecf9b478e5c13e2461cab0a4d
+%global gitdate 20170624
+%global commit0 53e145066bd6302f041880f2450d7549768d1976
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.12.0
+Version:        1.12.1
 Release:        5%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -181,6 +181,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
 
 %changelog
+
+* Sat Jun 24 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.1-5.git53e1450
+- Updated to 1.12.1-5.git53e1450
 
 * Thu May 25 2017 David Vásquez <davidva AT tutanota DOT com> 1.12.0-5
 - Mitigation of https://bugzilla.redhat.com/show_bug.cgi?id=1449884
