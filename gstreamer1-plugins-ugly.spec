@@ -1,11 +1,11 @@
-%global gitdate 20170624
-%global commit0 53e145066bd6302f041880f2450d7549768d1976
+%global gitdate 20170720
+%global commit0 2ac37760b031b16a07a836d1fd6ff62c2525925c
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.12.1
+Version:        1.12.2
 Release:        5%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -148,7 +148,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-ugly-free.appdata.xml <<EOF
 EOF
 
 
-%files -f gst-plugins-ugly-1.0.lang
+%files 
 %doc AUTHORS README REQUIREMENTS COPYING
 %{_datadir}/gstreamer-1.0
 # Plugins without external dependencies
@@ -169,7 +169,7 @@ EOF
 # Take the dir and everything below it for proper dir ownership
 %doc %{_datadir}/gtk-doc
 
-%files -n gstreamer1-plugins-ugly-free
+%files -n gstreamer1-plugins-ugly-free -f gst-plugins-ugly-1.0.lang
 %{_datadir}/appdata/gstreamer-ugly-free.appdata.xml
 # Plugins without external dependencies
 %{_libdir}/gstreamer-1.0/libgstxingmux.so
@@ -181,6 +181,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
 
 %changelog
+
+* Thu Jul 20 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.2-5.git2ac3776
+- Updated to 1.12.2-5.git2ac3776
 
 * Sat Jun 24 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.1-5.git53e1450
 - Updated to 1.12.1-5.git53e1450
