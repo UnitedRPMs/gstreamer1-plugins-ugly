@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.12.3
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -181,6 +181,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
 
 %changelog
+
+* Sat Sep 30 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.12.3-8.gitffbf076  
+- Automatic Mass Rebuild
 
 * Tue Sep 26 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 1.12.3-7-gitffbf076
 - Rebuilt for mpg123
