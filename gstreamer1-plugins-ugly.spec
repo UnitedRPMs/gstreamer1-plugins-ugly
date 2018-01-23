@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.12.4
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -161,7 +161,6 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstamrwbdec.so
 # %{_libdir}/gstreamer-1.0/libgstmad.so
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
-%{_libdir}/gstreamer-1.0/libgsttwolame.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
 %{_libdir}/gstreamer-1.0/libgstrealmedia.so
 
@@ -179,8 +178,12 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstlame.so
 %{_libdir}/gstreamer-1.0/libgstmpg123.so
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
+%{_libdir}/gstreamer-1.0/libgsttwolame.so
 
 %changelog
+
+* Sun Jan 21 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.12.4-8.git46fab99
+- Twolame plugins now in gstreamer1-plugins-ugly-free
 
 * Fri Dec 08 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.12.4-7.git46fab99 
 - Updated to 1.12.4-7.git46fab99 
