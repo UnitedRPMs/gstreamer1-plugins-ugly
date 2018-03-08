@@ -155,11 +155,11 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstasf.so
 %{_libdir}/gstreamer-1.0/libgstdvdlpcmdec.so
 %{_libdir}/gstreamer-1.0/libgstdvdsub.so
-# %{_libdir}/gstreamer-1.0/libgstrmdemux.so
+# {_libdir}/gstreamer-1.0/libgstrmdemux.so
 # Plugins with external dependencies
 %{_libdir}/gstreamer-1.0/libgstamrnb.so
 %{_libdir}/gstreamer-1.0/libgstamrwbdec.so
-# %{_libdir}/gstreamer-1.0/libgstmad.so
+# {_libdir}/gstreamer-1.0/libgstmad.so
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
 %{_libdir}/gstreamer-1.0/libgstrealmedia.so
@@ -175,10 +175,10 @@ EOF
 # Plugins with external dependencies
 %{_libdir}/gstreamer-1.0/libgstcdio.so
 %{_libdir}/gstreamer-1.0/libgstdvdread.so
-%{_libdir}/gstreamer-1.0/libgstlame.so
-%{_libdir}/gstreamer-1.0/libgstmpg123.so
+#{_libdir}/gstreamer-1.0/libgstlame.so
+#{_libdir}/gstreamer-1.0/libgstmpg123.so
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
-%{_libdir}/gstreamer-1.0/libgsttwolame.so
+#{_libdir}/gstreamer-1.0/libgsttwolame.so
 
 %changelog
 
