@@ -1,12 +1,12 @@
-%global gitdate 20171208
-%global commit0 46fab99f2ef5581d63c2d11c57fb741553ede37f
+%global gitdate 20180307
+%global commit0 7593095967896d6df68b607126c029d1afd8fee0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.12.4
-Release:        8%{?gver}%{dist}
+Version:        1.13.90
+Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -181,6 +181,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgsttwolame.so
 
 %changelog
+
+* Wed Mar 07 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.13.90-7.git7593095 
+- Updated to 1.13.90-7.git7593095
 
 * Sun Jan 21 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.12.4-8.git46fab99
 - Twolame plugins now in gstreamer1-plugins-ugly-free
