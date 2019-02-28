@@ -1,5 +1,5 @@
-%global gitdate 20190118
-%global commit0 2365d2b5d778e6b2ee57c4c960b4d10e85df8f34
+%global gitdate 20190227
+%global commit0 19b744631ba79075676c49053211b3afc103e79a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -181,6 +181,9 @@ EOF
 #{_libdir}/gstreamer-1.0/libgsttwolame.so
 
 %changelog
+
+* Wed Feb 27 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.15.2-7.git19b7446
+- Updated to 1.15.2-7.git19b7446
 
 * Fri Jan 18 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.15.1-7.git2365d2b
 - Updated to 1.15.1-7.git2365d2b
