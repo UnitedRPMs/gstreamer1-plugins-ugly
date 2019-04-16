@@ -5,7 +5,7 @@
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.15.1
+Version:        1.15.2
 Release:        8%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
