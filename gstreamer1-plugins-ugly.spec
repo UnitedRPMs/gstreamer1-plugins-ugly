@@ -1,12 +1,12 @@
-%global gitdate 20190227
-%global commit0 19b744631ba79075676c49053211b3afc103e79a
+%global gitdate 20190419
+%global commit0 6cbac8d09f7866827381a9d0554b7a61d45b41b5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.15.2
-Release:        8%{?gver}%{dist}
+Version:        1.16.0
+Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -181,6 +181,9 @@ EOF
 #{_libdir}/gstreamer-1.0/libgsttwolame.so
 
 %changelog
+
+* Fri Apr 19 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.0-7.git6cbac8d
+- Updated to 1.16.0-7.git6cbac8d
 
 * Fri Mar 22 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.15.2-8.git19b7446
 - Rebuilt for x264
