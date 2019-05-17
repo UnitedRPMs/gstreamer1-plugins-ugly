@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.16.0
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -93,7 +93,8 @@ CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -
     --enable-debug \
     --enable-gtk-doc \
     --enable-silent-rules \
-    --enable-mpg123
+    --disable-mpeg2dec \
+    --enable-mpg123 
 
 make %{?_smp_mflags} V=0
 
@@ -160,7 +161,6 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstamrnb.so
 %{_libdir}/gstreamer-1.0/libgstamrwbdec.so
 # {_libdir}/gstreamer-1.0/libgstmad.so
-%{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 %{_libdir}/gstreamer-1.0/libgstx264.so
 %{_libdir}/gstreamer-1.0/libgstrealmedia.so
 
@@ -179,8 +179,12 @@ EOF
 #{_libdir}/gstreamer-1.0/libgstmpg123.so
 %{_libdir}/gstreamer-1.0/libgsta52dec.so
 #{_libdir}/gstreamer-1.0/libgsttwolame.so
+%{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Thu May 16 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.0-8.git6cbac8d
+- mpeg2dec changed to gstreamer1-plugins-ugly-free
 
 * Fri Apr 19 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.0-7.git6cbac8d
 - Updated to 1.16.0-7.git6cbac8d
