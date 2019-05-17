@@ -93,7 +93,6 @@ CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -
     --enable-debug \
     --enable-gtk-doc \
     --enable-silent-rules \
-    --disable-mpeg2dec \
     --enable-mpg123 
 
 make %{?_smp_mflags} V=0
