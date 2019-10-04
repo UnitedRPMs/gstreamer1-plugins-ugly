@@ -3,5 +3,6 @@ BUILDROOT/*
 RPMS/*
 SPECS/*
 SRPMS/*
-gstreamer1-plugins-ugly*.tar.gz
+*.tar.gz
 .directory
+*.rpm
