@@ -1,11 +1,11 @@
-%global gitdate 20191002
-%global commit0 34c7d2b37b1ef73206e282e15d6382fae2182137
+%global gitdate 20191204
+%global commit0 4b2943ee2788331e4000f0f7e226cd5ce2c135a4
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.16.1
+Version:        1.16.2
 Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -181,6 +181,10 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Wed Dec 04 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.2-7.git4b2943e
+- Updated to 1.16.2
+
 
 * Wed Oct 02 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.1-7.git34c7d2b
 - Updated to 1.16.1
