@@ -6,7 +6,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.16.2
-Release:        8%{?gver}%{dist}
+Release:        9%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -23,7 +23,7 @@ BuildRequires:  libmpeg2-devel >= 0.4.0
 BuildRequires:  orc-devel >= 0.4.5
 BuildRequires:  libcdio-devel >= 0.82
 BuildRequires:  twolame-devel
-BuildRequires:  x264-devel >= 0.0.0-0.28
+BuildRequires:  x264-devel >= 0.159
 BuildRequires:  opencore-amr-devel
 BuildRequires:	mpg123-devel
 BuildRequires:	check-devel
@@ -181,6 +181,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Sat Jul 04 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.2-9.git4b2943e
+- Rebuilt for x264
 
 * Fri Feb 28 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.2-8.git4b2943e
 - Rebuilt
