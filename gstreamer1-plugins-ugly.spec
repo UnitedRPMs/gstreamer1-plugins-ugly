@@ -1,19 +1,21 @@
 %global gitdate 20191204
-%global commit0 4b2943ee2788331e4000f0f7e226cd5ce2c135a4
+%global commit0 e1e53da7604faeeb97c8dee5fb44d9367af1ca5f
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
+%global         majorminor 1.0
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.16.2
-Release:        9%{?gver}%{dist}
+Version:        1.17.2
+Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
 Source0: 	https://github.com/GStreamer/gst-plugins-ugly/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 BuildRequires:  gstreamer1-devel >= %{version}
 BuildRequires:  gstreamer1-plugins-base-devel >= %{version}
-BuildRequires:  gettext-devel gtk-doc
+BuildRequires:  gcc-c++
+BuildRequires:  gettext-devel 
 BuildRequires:  a52dec-devel >= 0.7.3
 BuildRequires:  libdvdread-devel >= 0.9.0
 BuildRequires:  lame-devel >= 3.89
@@ -31,6 +33,8 @@ BuildRequires:	git
 BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	libtool
+BuildRequires:	meson
+BuildRequires:	cmake
 Recommends:	gstreamer1-plugins-ugly-free >= %{version}
 
 %description
@@ -79,28 +83,17 @@ This package contains plug-ins whose license is not fully compatible with LGPL.
 %autosetup -n gst-plugins-ugly-%{commit0} 
 rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common  
 
-%build
+%meson \
+    -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
+    -D package-origin="https://unitedrpms.github.io" \
+    -D doc=disabled -D sidplay=disabled
 
-NOCONFIGURE=1 ./autogen.sh
+%meson_build 
 
-%if 0%{?fedora} >= 26
-CFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-error" CXXFLAGS="-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wall -Wno-error" CPPFLAGS="-Wdate-time -D_FORTIFY_SOURCE=2" LDFLAGS="-Wl,-z,relro -Wl,-z,defs -Wl,-O1 -Wl,--as-needed"
-%endif
-
-%configure --disable-static \
-    --with-package-name="gst-plugins-ugly 1.0 rpmfusion rpm" \
-    --with-package-origin="http://rpmfusion.org/" \
-    --enable-debug \
-    --enable-gtk-doc \
-    --enable-silent-rules \
-    --enable-mpg123 
-
-make %{?_smp_mflags} V=0
 
 %install
-%make_install
-%find_lang gst-plugins-ugly-1.0
-rm $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/*.la
+%meson_install 
+
 
 # Register as an AppStream component to be visible in the software center
 #
@@ -147,6 +140,8 @@ cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-ugly-free.appdata.xml <<EOF
 </component>
 EOF
 
+%find_lang gst-plugins-ugly-%{majorminor}
+find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %files 
 %doc AUTHORS README REQUIREMENTS COPYING
@@ -165,9 +160,9 @@ EOF
 
 %files devel-docs
 # Take the dir and everything below it for proper dir ownership
-%doc %{_datadir}/gtk-doc
+%doc AUTHORS README REQUIREMENTS COPYING
 
-%files -n gstreamer1-plugins-ugly-free -f gst-plugins-ugly-1.0.lang
+%files -n gstreamer1-plugins-ugly-free -f gst-plugins-ugly-%{majorminor}.lang
 %{_datadir}/appdata/gstreamer-ugly-free.appdata.xml
 # Plugins without external dependencies
 %{_libdir}/gstreamer-1.0/libgstxingmux.so
@@ -181,6 +176,9 @@ EOF
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Fri Jul 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.17.2-7.gite1e53da
+- Updated to 1.17.2
 
 * Sat Jul 04 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.16.2-9.git4b2943e
 - Rebuilt for x264
