@@ -101,7 +101,7 @@ rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common
 # project, translated and installed into the right place during `make install`.
 #
 # See http://www.freedesktop.org/software/appstream/docs/ for more details.
-#
+
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
 cat > $RPM_BUILD_ROOT%{_datadir}/appdata/gstreamer-ugly-free.appdata.xml <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
