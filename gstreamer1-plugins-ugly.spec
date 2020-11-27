@@ -7,7 +7,7 @@
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
 Version:        1.18.1
-Release:        7%{?gver}%{dist}
+Release:        8%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
@@ -25,7 +25,7 @@ BuildRequires:  libmpeg2-devel >= 0.4.0
 BuildRequires:  orc-devel >= 0.4.5
 BuildRequires:  libcdio-devel >= 0.82
 BuildRequires:  twolame-devel
-BuildRequires:  x264-devel >= 0.159
+BuildRequires:  x264-devel >= 1:0.161
 BuildRequires:  opencore-amr-devel
 BuildRequires:	mpg123-devel
 BuildRequires:	check-devel
@@ -81,7 +81,7 @@ This package contains plug-ins whose license is not fully compatible with LGPL.
 
 %prep
 %autosetup -n gst-plugins-ugly-%{commit0} 
-rm -rf common && git clone git://anongit.freedesktop.org/gstreamer/common  
+rm -rf common && git clone https://github.com/GStreamer/common.git  
 
 %meson \
     -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
@@ -176,6 +176,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Mon Nov 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.1-8.git720672e
+- Rebuilt for x264
 
 * Thu Oct 29 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.1-7.git720672e
 - Updated 1.18.1
