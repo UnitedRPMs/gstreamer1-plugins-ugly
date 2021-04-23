@@ -1,12 +1,12 @@
 %global gitdate 20191204
-%global commit0 ad60e5463f591caa1c8470f180fd0ef8fce4a802
+%global commit0 bb3f9de20025820fb1c913f96e31cf0a27528bcc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 %global         majorminor 1.0
 
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.18.3
+Version:        1.18.4
 Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
@@ -83,16 +83,16 @@ This package contains plug-ins whose license is not fully compatible with LGPL.
 %autosetup -n gst-plugins-ugly-%{commit0} 
 rm -rf common && git clone https://github.com/GStreamer/common.git  
 
-%meson \
+meson build --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc  \
     -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
     -D package-origin="https://unitedrpms.github.io" \
     -D doc=disabled -D sidplay=disabled
 
-%meson_build 
+%meson_build -C build
 
 
 %install
-%meson_install 
+%meson_install -C build
 
 
 # Register as an AppStream component to be visible in the software center
@@ -176,6 +176,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Mon Apr 19 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.4-7.gitbb3f9de
+- Updated to 1.18.4
 
 * Mon Jan 25 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.18.3-7.gitad60e54
 - Updated to 1.18.3
