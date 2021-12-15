@@ -4,14 +4,18 @@
 %global gver .git%{shortcommit0}
 %global         majorminor 1.0
 
+%global         meson_conf      meson --buildtype=release --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc
+
+%global debug_package %{nil}
+
 Summary:        GStreamer 1.0 streaming media framework "ugly" plug-ins
 Name:           gstreamer1-plugins-ugly
-Version:        1.19.2
+Version:        1.19.3
 Release:        7%{?gver}%{dist}
 License:        LGPLv2+
 Group:          Applications/Multimedia
 URL:            http://gstreamer.freedesktop.org/
-Source0: 	https://github.com/GStreamer/gst-plugins-ugly/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0: 	https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-%{version}.tar.xz
 BuildRequires:  gstreamer1-devel >= %{version}
 BuildRequires:  gstreamer1-plugins-base-devel >= %{version}
 BuildRequires:  gcc-c++
@@ -80,19 +84,19 @@ This package contains plug-ins whose license is not fully compatible with LGPL.
 
 
 %prep
-%autosetup -n gst-plugins-ugly-%{commit0} 
+%autosetup -n gst-plugins-ugly-%{version} 
 rm -rf common && git clone https://github.com/GStreamer/common.git  
 
-meson build --prefix=/usr --libdir=%{_libdir} --libexecdir=/usr/libexec --bindir=/usr/bin --sbindir=/usr/sbin --includedir=/usr/include --datadir=/usr/share --mandir=/usr/share/man --infodir=/usr/share/info --localedir=/usr/share/locale --sysconfdir=/etc  \
+%meson_conf _build \
     -D package-name="gst-plugins-bad 1.0 unitedrpms rpm" \
     -D package-origin="https://unitedrpms.github.io" \
-    -D doc=disabled -D sidplay=disabled
+    -D doc=disabled -D sidplay=disabled -D x264=enabled  \
+    -D asfdemux=enabled -D dvdlpcmdec=enabled -D gpl=enabled 
 
-%meson_build -C build
-
+%meson_build -C _build
 
 %install
-%meson_install -C build
+%meson_install -C _build 
 
 
 # Register as an AppStream component to be visible in the software center
@@ -176,6 +180,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/gstreamer-1.0/libgstmpeg2dec.so
 
 %changelog
+
+* Wed Nov 17 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.19.3-7.gitf513c28
+- Updated to 1.19.3
 
 * Mon Oct 04 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 1.19.2-7.git499d3cd
 - Updated to 1.19.2
